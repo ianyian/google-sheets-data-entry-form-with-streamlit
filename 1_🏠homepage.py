@@ -8,9 +8,9 @@ st.set_page_config(
 )
 
 # Display Title and Description
-st.title("Vendor Management Portal")
+st.title("Inventory Portal")
 st.markdown("Enter the details of the new vendor below.")
-st.sidebar.success("select a page above")
+# st.sidebar.success("select a page above")
 
 # Establishing a Google Sheets connection
 conn = st.connection("gsheets", type=GSheetsConnection)
