@@ -2,9 +2,15 @@ import streamlit as st
 from streamlit_gsheets import GSheetsConnection
 import pandas as pd
 
+st.set_page_config(
+    page_title="Hello Book",
+    page_icon="😸"
+)
+
 # Display Title and Description
 st.title("Vendor Management Portal")
 st.markdown("Enter the details of the new vendor below.")
+st.sidebar.success("select a page above")
 
 # Establishing a Google Sheets connection
 conn = st.experimental_connection("gsheets", type=GSheetsConnection)
