@@ -32,7 +32,8 @@ PRODUCTS = [
 # Onboarding New Vendor Form
 with st.form(key="vendor_form"):
     company_name = st.text_input(label="Company Name*")
-    business_type = st.selectbox("Business Type*", options=BUSINESS_TYPES, index=None)
+    business_type = st.selectbox(
+        "Business Type*", options=BUSINESS_TYPES, index=None)
     products = st.multiselect("Products Offered", options=PRODUCTS)
     years_in_business = st.slider("Years in Business", 0, 50, 5)
     onboarding_date = st.date_input(label="Onboarding Date")
@@ -68,10 +69,10 @@ with st.form(key="vendor_form"):
             )
 
             # Add the new vendor data to the existing data
-            updated_df = pd.concat([existing_data, vendor_data], ignore_index=True)
+            updated_df = pd.concat(
+                [existing_data, vendor_data], ignore_index=True)
 
             # Update Google Sheets with the new vendor data
             conn.update(worksheet="Vendors", data=updated_df)
 
             st.success("Vendor details successfully submitted!")
-
