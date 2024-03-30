@@ -9,7 +9,7 @@ st.set_page_config(
 
 # Display Title and Description
 st.title("Inventory Portal")
-st.markdown("Enter the details of the new vendor below.")
+st.markdown("Enter the details of the stationary cart.")
 
 # Establishing a Google Sheets connection
 conn = st.connection("gsheets", type=GSheetsConnection)
@@ -34,9 +34,20 @@ PRODUCTS = [
     "Other",
 ]
 
+DEPARTMENT = [
+    "IT",
+    "Finance",
+    "HR",
+    "Security"
+]
+
 # Onboarding New Vendor Form
 with st.form(key="vendor_form"):
-    company_name = st.text_input(label="Company Name*")
+    employee_name = st.text_input(label="Employee Name*")
+
+    department = st.selectbox(
+        "Department*", options=DEPARTMENT, index=None)
+
     business_type = st.selectbox(
         "Business Type*", options=BUSINESS_TYPES, index=None)
     products = st.multiselect("Products Offered", options=PRODUCTS)
@@ -52,18 +63,18 @@ with st.form(key="vendor_form"):
     # If the submit button is pressed
     if submit_button:
         # Check if all mandatory fields are filled
-        if not company_name or not business_type:
+        if not employee_name or not business_type:
             st.warning("Ensure all mandatory fields are filled.")
             st.stop()
-        elif existing_data["CompanyName"].str.contains(company_name).any():
-            st.warning("A vendor with this company name already exists.")
-            st.stop()
+        # elif existing_data["EmployeeName"].str.contains(employee_name).any():
+        #    st.warning("A vendor with this company name already exists.")
+        #    st.stop()
         else:
             # Create a new row of vendor data
             vendor_data = pd.DataFrame(
                 [
                     {
-                        "CompanyName": company_name,
+                        "EmployeeName": employee_name,
                         "BusinessType": business_type,
                         "Products": ", ".join(products),
                         "YearsInBusiness": years_in_business,
