@@ -8,7 +8,7 @@ st.set_page_config(
 )
 
 # Display Title and Description
-st.title("Inventory Portal")
+st.title("Inventory Portal v1.0.1")
 st.markdown("Enter the details of the stationary cart.")
 
 # Establishing a Google Sheets connection
